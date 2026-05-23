@@ -1,4 +1,4 @@
-# BURNRATE AI
+# Stackspend Audit
 AI infrastructure costs are exploding across startups using Cursor, Claude, ChatGPT, Copilot, and API-based workflows.
 
 BURNRATE AI helps teams benchmark their AI tooling spend, detect unnecessary upgrades, compare cheaper alternatives, and estimate monthly + annual savings instantly.
