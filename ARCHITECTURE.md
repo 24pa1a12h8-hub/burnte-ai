@@ -1,4 +1,4 @@
-# BURNRATE AI — Architecture
+# StackSpend Audit — Architecture
 
 ## Executive Summary
 
