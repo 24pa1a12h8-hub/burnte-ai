@@ -184,9 +184,13 @@ export function AuditWizard() {
 
       // If the server did not return an id, fall back to local-only share.
       router.push(`/result/${result.id}`);
-    } catch (error) {
-      setSubmitError(error instanceof Error ? error.message : "Unable to save audit. Please try again.");
-    } finally {
+   } catch (error) {
+  setSubmitError(
+    error instanceof Error
+      ? "Unable to generate audit summary right now. Please try again later."
+      : "Unable to save audit. Please try again later.",
+  );
+} finally {
       setIsSubmitting(false);
     }
   };
