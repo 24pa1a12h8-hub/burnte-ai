@@ -63,7 +63,14 @@ export async function POST(request: Request) {
     }
 
     return NextResponse.json({ ok: true, id: data?.id ?? null });
-  } catch {
-    return NextResponse.json({ error: "Failed to save audit." }, { status: 500 });
-  }
+  } catch (error) {
+  console.error("Audit API error:", error);
+
+  return NextResponse.json(
+    {
+      error: "Unable to process audit request right now.",
+    },
+    { status: 500 },
+  );
+}
 }
