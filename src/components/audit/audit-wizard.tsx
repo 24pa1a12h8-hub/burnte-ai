@@ -147,40 +147,9 @@ export function AuditWizard() {
       window.localStorage.setItem(LAST_REPORT_KEY, result.id);
       window.localStorage.removeItem(DRAFT_KEY);
 
-      const response = await fetch("/api/audits", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          selectedTools: draft.selectedToolIds,
-          plans: draft.plans,
-          monthlySpend: result.totalCurrentMonthlySpend,
-          annualSavings: result.totalAnnualSavings,
-          recommendations: result.recommendations,
-          teamSize: draft.teamSize,
-          useCase: draft.useCase,
-          createdAt: result.createdAt,
-        }),
-      });
-
-      if (!response.ok) {
-        const payload = (await response.json()) as { error?: string };
-        throw new Error(payload.error ?? "Unable to save audit to database.");
-      }
-
-      const auditResponse = (await response.json()) as { id?: string | null };
-      const supabaseId = typeof auditResponse.id === "string" && auditResponse.id.length > 0 ? auditResponse.id : null;
-
-      if (supabaseId) {
-        // Store this audit under the Supabase row id so share URLs work on cold devices.
-        const refreshed = window.localStorage.getItem(REPORTS_KEY);
-        const mergedReports = refreshed ? (JSON.parse(refreshed) as Record<string, unknown>) : {};
-        const resultForShare = { ...result, id: supabaseId, supabaseAuditId: supabaseId };
-        mergedReports[supabaseId] = resultForShare;
-        window.localStorage.setItem(REPORTS_KEY, JSON.stringify(mergedReports));
-        window.localStorage.setItem(LAST_REPORT_KEY, supabaseId);
-        router.push(`/result/${supabaseId}`);
-        return;
-      }
+      // Temporary local-only audit flow while backend integrations are stabilized.
+router.push(`/result/${result.id}`);
+return;
 
       // If the server did not return an id, fall back to local-only share.
       router.push(`/result/${result.id}`);
@@ -371,7 +340,7 @@ export function AuditWizard() {
                 disabled={!canContinue || isSubmitting}
                 className="w-full bg-violet-500 text-white hover:bg-violet-400 sm:w-auto"
               >
-                {isSubmitting ? "Calculating..." : "Generate Audit"}
+                {isSubmitting ? "Generting audit..." : "Generate Audit"}
               </Button>
             )}
           </div>

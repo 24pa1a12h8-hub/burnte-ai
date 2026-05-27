@@ -99,6 +99,8 @@ export function ResultView({ result }: { result: AuditResult }) {
     payload: LeadCapture,
     source: "talk_to_credex" | "notify_future_optimizations" | "walkthrough_request",
   ) => {
+    alert("Walkthrough request feature disabled in demo mode.");
+return;
     const response = await fetch("/api/leads", {
       method: "POST",
       headers: { "Content-Type": "application/json" },

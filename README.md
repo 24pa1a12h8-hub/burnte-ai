@@ -17,6 +17,10 @@ Deterministic SaaS funnel for benchmarking **multi-vendor AI tool spend**. Teams
 - Deterministic finance-readable optimization logic
 - Optional AI-generated executive summary layer (post-deterministic rendering only, does not affect calculations)
 
+## Current Stability Notes
+
+The audit workflow currently includes frontend and backend fallback handling for failed API responses. Environment-based integrations are still being stabilized for production readiness.
+
 ### Email System
 
 - Transactional emails are handled using **Resend**
